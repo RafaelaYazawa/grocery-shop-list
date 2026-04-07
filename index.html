@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <title>Grocery List</title>
+    </head>
+
+    <body class="p-8 bg-slate-400">
+        <h1 class="text-3xl font-semibold">Grocery List</h1>
+
+        <div class="m-4 space-y-4 space-x-2">
+            <div class="space-x-1">
+                <label for="product" class="font-medium italic">Product:</label>
+                <input type="text" id="product" name="product" class="bg-gray-200 px-2 rounded">
+            </div>
+
+            <div class="space-x-1">
+                <label for="quantity" class="font-medium italic">Quantity:</label>
+                <input type="number" name="quantity" id="quantity " class="bg-gray-200 px-2 rounded">
+            </div>
+        </div>
+
+        <ul></ul>
+    </body>
+
+</html>
