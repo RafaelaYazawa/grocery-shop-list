@@ -10,22 +10,48 @@
         <title>Grocery List</title>
     </head>
 
-    <body class="p-8 bg-slate-400">
+    <body class="p-8 bg-gray-900 text-gray-100">
         <h1 class="text-3xl font-semibold">Grocery List</h1>
 
         <div class="m-4 space-y-4 space-x-2">
             <div class="space-x-1">
-                <label for="product" class="font-medium italic">Product:</label>
-                <input type="text" id="product" name="product" class="bg-gray-200 px-2 rounded">
+                <label for="product-name" class="font-medium italic">Product:</label>
+                <input type="text" id="product-name" name="product" class="bg-gray-700 px-2 rounded">
             </div>
 
             <div class="space-x-1">
                 <label for="quantity" class="font-medium italic">Quantity:</label>
-                <input type="number" name="quantity" id="quantity " class="bg-gray-200 px-2 rounded">
+                <input type="number" name="quantity" id="quantity" class="bg-gray-700 px-2 rounded">
             </div>
+
+            <div class="space-x-1">
+                <label for="product-price" class="font-medium italic">Price(¥):</label>
+                <input type="number" name="price" id="product-price" class="bg-gray-700 px-2 rounded">
+            </div>
+
+            <button class="btn my-3 border border-solid border-green-700 p-2 rounded bg-green-900">Add item</button>
         </div>
 
-        <ul></ul>
+        <table class="table-auto w-full border-collapse border-b bg-gray-700 ">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+
+            <tbody class="product-overview">
+                <!-- Added items will appear here -->
+            </tbody>
+
+        </table>
+
+        <div class="total-price">
+        </div>
+
     </body>
+
+    <script src="main.js"></script>
 
 </html>
