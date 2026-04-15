@@ -1,12 +1,12 @@
 const AddProductBtn = document.querySelector(".btn");
 const productNameInput = document.querySelector("#product-name");
 const productQuantity = document.querySelector("#quantity");
-const productPrice = document.querySelector("#product-price");
+const productPrice = document.querySelector("#price");
+const tableBody = document.querySelector("tbody");
 
 const resetTableBtn = document.querySelector(".reset-table");
 resetTableBtn.addEventListener("click", () => {
   localStorage.clear();
-  const tableBody = document.querySelector("tbody");
   tableBody.innerHTML = "";
 
   const row = document.createElement("tr");
@@ -75,9 +75,9 @@ function renderTable(products) {
 // Add row template to table body
 function rowTemplate(product, totalPricePerItem) {
   return `
-      <td>${product.name}</td>
-      <td>${product.quantity}</td>
-      <td>¥${totalPricePerItem}</td>
+      <td class="p-2 border-b border-gray-500">${product.name}</td>
+      <td class="p-2 border-b border-gray-500">${product.quantity}</td>
+      <td class="p-2 border-b border-gray-500">¥${totalPricePerItem}</td>
   `;
 }
 
