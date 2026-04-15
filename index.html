@@ -10,27 +10,36 @@
         <title>Grocery List</title>
     </head>
 
-    <body class="m-2 p-8 bg-gray-900 text-gray-100">
+    <body class="m-2 p-8 bg-gray-900 text-gray-100 md:max-w-3xl md:mx-auto">
         <h1 class="text-3xl font-semibold">Grocery List</h1>
 
-        <div class="m-4 space-y-4 space-x-2">
-            <div class="mb-0 space-x-1">
-                <label for="product-name" class="font-medium italic">Product:</label>
-                <input type="text" id="product-name" name="product" class="bg-gray-700 px-2 rounded">
+        <div class="m-4 space-y-4 space-x-2 md:max-w-sm">
+            <div class="mb-2">
+                <div class="mb-0 space-x-1 max-w-3xl mx-auto">
+                    <label for="product-name" class="font-medium italic">Product:</label>
+                    <input type="text" id="product-name" name="product" class="w-full bg-gray-700 px-2 rounded"
+                        placeholder="Milk">
+                </div>
+                <span class="m-0 name-error text-xs text-red-500"></span>
             </div>
-            <span class="m-0 name-error text-xs text-red-500"></span>
 
-            <div class="mb-0 space-x-1">
-                <label for="quantity" class="font-medium italic">Quantity:</label>
-                <input type="number" name="quantity" id="quantity" class="bg-gray-700 px-2 rounded">
+            <div class="mb-2">
+                <div class="mb-0 space-x-1 max-w-3xl mx-auto">
+                    <label for="quantity" class="font-medium italic">Quantity:</label>
+                    <input type="number" name="quantity" id="quantity" class="w-full bg-gray-700 px-2 rounded"
+                        placeholder="2">
+                </div>
+                <span class="m-0 quantity-error text-xs text-red-500"></span>
             </div>
-            <span class="m-0 quantity-error text-xs text-red-500"></span>
 
-            <div class="mb-0 space-x-1">
-                <label for="product-price" class="font-medium italic">Price(¥):</label>
-                <input type="number" name="price" id="product-price" class="bg-gray-700 px-2 rounded">
+            <div class="mb-2">
+                <div class="mb-0 space-x-1 max-w-3xl mx-auto">
+                    <label for="price" class="font-medium italic">Price(¥):</label>
+                    <input type="number" name="price" id="price" class="w-full  bg-gray-700 px-2 rounded"
+                        placeholder="130">
+                </div>
+                <span class="m-0 price-error text-xs text-red-500"></span>
             </div>
-            <span class="m-0 price-error text-xs text-red-500"></span>
         </div>
 
         <button type="button" class="btn mt-2 mb-3 mx-3 border border-solid border-green-700 p-2 rounded bg-green-900">
@@ -42,9 +51,9 @@
             Reset list
         </button>
 
-        <div class="m-4">
-            <table class="table-auto w-full border-collapse bg-gray-700 text-center">
-                <thead class="border-b bg-slate-700">
+        <div class="my-4 mx-3">
+            <table class="table-fixed w-full border-spacing-2 rounded w-full bg-gray-700 text-center">
+                <thead class="border-b bg-slate-700 ">
                     <tr>
                         <th class="p-2">Product</th>
                         <th class="p-2">Quantity</th>
