@@ -4,15 +4,18 @@ const productQuantity = document.querySelector("#quantity");
 const productPrice = document.querySelector("#price");
 const tableBody = document.querySelector("tbody");
 
+const totalPriceElement = document.querySelector(".total-price-value");
+
 const resetTableBtn = document.querySelector(".reset-table");
 resetTableBtn.addEventListener("click", () => {
-  localStorage.clear();
+  localStorage.removeItem("products");
   tableBody.innerHTML = "";
 
   const row = document.createElement("tr");
   row.innerHTML =
     "<td class='p-3' colspan='3'>Add some products to your list!</td>";
   tableBody.appendChild(row);
+  totalPriceElement.textContent = "¥0";
 });
 
 AddProductBtn.addEventListener("click", () => {
@@ -32,6 +35,8 @@ AddProductBtn.addEventListener("click", () => {
   const updatedProducts = updateProductInLocalStorage(product);
 
   renderTable(updatedProducts);
+  totalPriceElement.textContent = `¥${calculateTotalPrice(updatedProducts)}`;
+
   clearForm();
 });
 
@@ -57,7 +62,6 @@ function validateInput(name, quantity, price) {
 }
 
 function renderTable(products) {
-  const tableBody = document.querySelector("tbody");
   tableBody.innerHTML = "";
 
   products.forEach((product) => {
@@ -123,7 +127,15 @@ document.addEventListener("DOMContentLoaded", () => {
     row.innerHTML =
       "<td class='p-3' colspan='3'>Add some products to your list!</td>";
     tableBody.appendChild(row);
+    totalPriceElement.textContent = "¥0";
   } else {
     renderTable(products);
+    totalPriceElement.textContent = `¥${calculateTotalPrice(products)}`;
   }
 });
+
+function calculateTotalPrice(products) {
+  return products.reduce((total, product) => {
+    return total + calculateTotalPricePerItem(product.quantity, product.price);
+  }, 0);
+}
