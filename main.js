@@ -47,10 +47,7 @@ AddProductBtn.addEventListener("click", () => {
 
   saveProductsToLocalStorage(updatedProducts);
 
-  renderTable(tableBody, updatedProducts);
-  const total = calculateTotalPrice(updatedProducts);
-  totalPriceElement.textContent = `¥${total}`;
-
+  updateTableAndTotal(updatedProducts);
   clearForm();
 });
 
@@ -63,3 +60,44 @@ document.addEventListener("DOMContentLoaded", () => {
   const total = calculateTotalPrice(products);
   totalPriceElement.textContent = `¥${total}`;
 });
+
+tableBody.addEventListener("focusout", (e) => {
+  const cell = e.target;
+  if (!cell || !cell.dataset.field) return;
+
+  const row = cell.closest("tr");
+  const index = Number(row.dataset.index);
+  const field = cell.dataset.field;
+  const value = cell.textContent.trim();
+
+  const products = getProductsFromLocalStorage();
+  const product = products[index];
+  if (!product) return;
+
+  if (field === "name") {
+    if (!value || value.length < 1) {
+      cell.textContent = product.name;
+      return;
+    }
+
+    product.name = value.toLowerCase();
+  }
+
+  if (field === "quantity") {
+    const quantity = Number(value);
+    if (isNaN(quantity) || quantity <= 0) {
+      cell.textContent = product.quantity;
+      return;
+    }
+    product.quantity = quantity;
+  }
+
+  saveProductsToLocalStorage(products);
+  updateTableAndTotal(products);
+});
+
+function updateTableAndTotal(products) {
+  renderTable(tableBody, products);
+  const total = calculateTotalPrice(products);
+  totalPriceElement.textContent = `¥${total}`;
+}

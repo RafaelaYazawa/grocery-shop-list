@@ -9,12 +9,13 @@ function renderTable(table, products) {
     return;
   }
 
-  products.forEach((product) => {
+  products.forEach((product, rowIndex) => {
     const total = product.quantity * product.price;
     const row = document.createElement("tr");
+    row.dataset.index = rowIndex;
     row.innerHTML = `
-      <td class="p-2 border-b border-gray-500">${product.name}</td>
-      <td class="p-2 border-b border-gray-500">${product.quantity}</td>
+      <td class="p-2 border-b border-gray-500" data-field="name" contenteditable="true">${product.name}</td>
+      <td class="p-2 border-b border-gray-500" data-field="quantity" contenteditable="true">${product.quantity}</td>
       <td class="p-2 border-b border-gray-500">¥${total}</td>
     `;
     table.appendChild(row);
