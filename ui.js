@@ -15,8 +15,12 @@ function renderTable(table, products) {
     row.dataset.index = rowIndex;
     row.innerHTML = `
       <td class="p-2 border-b border-gray-500" data-field="name" contenteditable="true">${product.name}</td>
-      <td class="p-2 border-b border-gray-500" data-field="quantity" contenteditable="true">${product.quantity}</td>
-      <td class="p-2 border-b border-gray-500">¥${total}</td>
+      <td class="p-2 border-b border-gray-500 flex items-center justify-between" data-field="quantity" >
+        <button class="decrease-btn">-</button>
+        <p class="quantity-value">${product.quantity}</p>
+        <button class="increase-btn">+</button>
+      </td>
+      <td class="p-2 border-b border-gray-500" data-field="total">¥${total}</td>
     `;
     table.appendChild(row);
   });

@@ -83,17 +83,7 @@ tableBody.addEventListener("focusout", (e) => {
     product.name = value.toLowerCase();
   }
 
-  if (field === "quantity") {
-    const quantity = Number(value);
-    if (isNaN(quantity) || quantity <= 0) {
-      cell.textContent = product.quantity;
-      return;
-    }
-    product.quantity = quantity;
-  }
-
   saveProductsToLocalStorage(products);
-  updateTableAndTotal(products);
 });
 
 function updateTableAndTotal(products) {
@@ -101,3 +91,38 @@ function updateTableAndTotal(products) {
   const total = calculateTotalPrice(products);
   totalPriceElement.textContent = `¥${total}`;
 }
+
+tableBody.addEventListener("click", (e) => {
+  const products = getProductsFromLocalStorage();
+
+  const row = e.target.closest("tr");
+  if (!row) return;
+
+  const index = Number(row.dataset.index);
+  const product = products[index];
+  if (!product) return;
+
+  const increaseBtn = e.target.classList.contains("increase-btn");
+  const decreaseBtn = e.target.classList.contains("decrease-btn");
+
+  if (increaseBtn) {
+    product.quantity += 1;
+  } else if (decreaseBtn) {
+    if (product.quantity > 1) {
+      product.quantity -= 1;
+    }
+  } else {
+    return;
+  }
+
+  saveProductsToLocalStorage(products);
+
+  const quantityValue = row.querySelector(".quantity-value");
+  const totalCell = row.querySelector('[data-field="total"]');
+
+  quantityValue.textContent = product.quantity;
+  totalCell.textContent = `¥${product.quantity * product.price}`;
+
+  const total = calculateTotalPrice(products);
+  totalPriceElement.textContent = `¥${total}`;
+});
