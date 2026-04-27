@@ -29,7 +29,9 @@ resetTableBtn.addEventListener("click", () => {
 });
 
 AddProductBtn.addEventListener("click", () => {
-  const name = productNameInput.value.trim().toLowerCase();
+  const name =
+    productNameInput.value.trim().charAt(0).toUpperCase() +
+    productNameInput.value.trim().slice(1).toLowerCase();
   const quantity = Number(productQuantity.value);
   const price = Number(productPrice.value);
 
@@ -80,10 +82,11 @@ tableBody.addEventListener("focusout", (e) => {
       return;
     }
 
-    product.name = value.toLowerCase();
+    product.name = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
   }
 
   saveProductsToLocalStorage(products);
+  console.log("Product updated:", product);
 });
 
 function updateTableAndTotal(products) {
@@ -108,7 +111,11 @@ tableBody.addEventListener("click", (e) => {
   if (increaseBtn) {
     product.quantity += 1;
   } else if (decreaseBtn) {
-    if (product.quantity > 1) {
+    if (product.quantity <= 1) {
+      products.splice(index, 1);
+      updateTableAndTotal(products);
+      return;
+    } else {
       product.quantity -= 1;
     }
   } else {
